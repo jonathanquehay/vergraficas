@@ -42,3 +42,58 @@ body {
   margin: 0;
   background-color: #1b1b1b;
 }
+
+.hidden {
+  display: none;
+}
+
+#intervals-checklist {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+#intervals-checklist label {
+  display: flex;
+  align-items: center;
+  font-size: 18px;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  background-color: #f9f9f9;
+}
+
+#intervals-checklist input[type="checkbox"] {
+  width: 25px;
+  height: 25px;
+  margin-right: 10px;
+}
+
+#intervals-checklist {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+#intervals-checklist label {
+  display: flex;
+  align-items: center;
+  font-size: 18px;
+  padding: 10px 15px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  background-color: blue;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+#intervals-checklist label:hover {
+  background-color: green;
+}
+
+#intervals-checklist input[type="checkbox"] {
+  width: 25px;
+  height: 25px;
+  margin-right: 10px;
+}

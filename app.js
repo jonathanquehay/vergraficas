@@ -1,6 +1,7 @@
 const intervals = ['1M', '1W', '1D', '4H', '1H', '30', '15', '5', '1'];
 const chartsContainer = document.getElementById('charts-container');
 const currencyPairSelect = document.getElementById('currency-pair');
+const intervalsChecklist = document.getElementById('intervals-checklist');
 
 // Función para crear un contenedor de gráfico
 function createChartContainer(pair, interval) {
@@ -54,7 +55,8 @@ function clearCharts() {
 // Función para actualizar los gráficos según la divisa seleccionada
 function updateCharts(pair) {
   clearCharts();
-  intervals.forEach(interval => {
+  const selectedIntervals = Array.from(intervalsChecklist.querySelectorAll('input:checked')).map(input => input.value);
+  selectedIntervals.forEach(interval => {
     const chartContainer = createChartContainer(pair, interval);
     chartsContainer.appendChild(chartContainer);
     initializeTradingViewWidget(pair, interval);
@@ -65,6 +67,30 @@ function updateCharts(pair) {
 currencyPairSelect.addEventListener('change', (event) => {
   const selectedPair = event.target.value;
   updateCharts(selectedPair);
+});
+
+// Evento para actualizar los gráficos cuando se seleccione una nueva divisa
+currencyPairSelect.addEventListener('change', (event) => {
+  const selectedPair = event.target.value;
+  updateCharts(selectedPair);
+});
+
+// Evento para ocultar/mostrar gráficos al hacer clic en los checkboxes
+intervalsChecklist.addEventListener('change', (event) => {
+  const checkbox = event.target;
+  const interval = checkbox.value;
+  const chartContainer = document.getElementById(`chart_${interval}`);
+
+  if (checkbox.checked) {
+    const selectedPair = currencyPairSelect.value;
+    const newChartContainer = createChartContainer(selectedPair, interval);
+    chartsContainer.appendChild(newChartContainer);
+    initializeTradingViewWidget(selectedPair, interval);
+  } else {
+    if (chartContainer) {
+      chartsContainer.removeChild(chartContainer);
+    }
+  }
 });
 
 // Inicializa los gráficos con la primera opción seleccionada
@@ -80,6 +106,8 @@ document.addEventListener('keydown', (event) => {
     }
   }
 });
+
+
 
 document.addEventListener('dblclick', () => {
   const controls = document.querySelector('.controls');
