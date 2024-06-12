@@ -80,3 +80,12 @@ document.addEventListener('keydown', (event) => {
     }
   }
 });
+
+document.addEventListener('dblclick', () => {
+  const controls = document.querySelector('.controls');
+  if (controls.style.display === 'none') {
+    controls.style.display = 'block';
+  } else {
+    controls.style.display = 'none';
+  }
+});
